@@ -1,3 +1,9 @@
+<?php
+$sql = "SELECT MaLoaiSanPham, TenLoaiSanPham 
+    FROM loaisanpham 
+    WHERE BiXoa = 0";
+$result = DataProvider::ExecuteQuery($sql);
+?>
 <!--top-header-->
 <div class="top-header">
 	<div class="container">
@@ -31,227 +37,28 @@
 <div class="header-bottom">
 	<div class="container">
 		<div class="top-nav">
-			<ul class="memenu skyblue"><li class="active"><a href="index.php">Home</a></li>
-				<li class="grid"><a href="#">Men</a>
-					<div class="mepanel">
-						<div class="row">
-							<div class="col1 me-one">
-								<h4>Shop</h4>
-								<ul>
-									<li><a href="index.php?c=5">New Arrivals</a></li>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">login</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">My Shopping Bag</a></li>
-								</ul>
-							</div>
-							<div class="col1 me-one">
-								<h4>Style Zone</h4>
-								<ul>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Style Videos</a></li>
-								</ul>	
-							</div>
-							<div class="col1 me-one">
-								<h4>Popular Brands</h4>
-								<ul>
-									<li><a href="index.php?c=5">Levis</a></li>
-									<li><a href="index.php?c=5">Persol</a></li>
-									<li><a href="index.php?c=5">Nike</a></li>
-									<li><a href="index.php?c=5">Edwin</a></li>
-									<li><a href="index.php?c=5">New Balance</a></li>
-									<li><a href="index.php?c=5">Jack & Jones</a></li>
-									<li><a href="index.php?c=5">Paul Smith</a></li>
-									<li><a href="index.php?c=5">Ray-Ban</a></li>
-									<li><a href="index.php?c=5">Wood Wood</a></li>
-								</ul>	
-							</div>
-						</div>
-					</div>
+			<ul class="memenu skyblue">
+				<li class=""><a href="index.php">Home</a>
+			
 				</li>
-				<li class="grid"><a href="#">Women</a>
-					<div class="mepanel">
-						<div class="row">
-							<div class="col1 me-one">
-								<h4>Shop</h4>
-								<ul>
-									<li><a href="index.php?c=5">New Arrivals</a></li>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">login</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">My Shopping Bag</a></li>
-								</ul>
-							</div>
-							<div class="col1 me-one">
-								<h4>Style Zone</h4>
-								<ul>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Style Videos</a></li>
-								</ul>	
-							</div>
-							<div class="col1 me-one">
-								<h4>Popular Brands</h4>
-								<ul>
-									<li><a href="index.php?c=5">Levis</a></li>
-									<li><a href="index.php?c=5">Persol</a></li>
-									<li><a href="index.php?c=5">Nike</a></li>
-									<li><a href="index.php?c=5">Edwin</a></li>
-									<li><a href="index.php?c=5">New Balance</a></li>
-									<li><a href="index.php?c=5">Jack & Jones</a></li>
-									<li><a href="index.php?c=5">Paul Smith</a></li>
-									<li><a href="index.php?c=5">Ray-Ban</a></li>
-									<li><a href="index.php?c=5">Wood Wood</a></li>
-								</ul>	
-							</div>
-						</div>
-					</div>
+				<?php while ($row = mysqli_fetch_array($result)) { ?>
+				<li class="grid"><a href="index.php?c=5&id=<?php echo $row["MaLoaiSanPham"] ?>"><?php echo $row["TenLoaiSanPham"] ?></a>
+					
+				</li>
+				<?php 
+		} ?>
+				<!-- <li class="grid"><a href="#">Women</a>
+					
 				</li>
 				<li class="grid"><a href="#">Kids</a>
-					<div class="mepanel">
-						<div class="row">
-							<div class="col1 me-one">
-								<h4>Shop</h4>
-								<ul>
-									<li><a href="index.php?c=5">New Arrivals</a></li>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">login</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">My Shopping Bag</a></li>
-								</ul>
-							</div>
-							<div class="col1 me-one">
-								<h4>Style Zone</h4>
-								<ul>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Style Videos</a></li>
-								</ul>	
-							</div>
-							<div class="col1 me-one">
-								<h4>Popular Brands</h4>
-								<ul>
-									<li><a href="index.php?c=5">Levis</a></li>
-									<li><a href="index.php?c=5">Persol</a></li>
-									<li><a href="index.php?c=5">Nike</a></li>
-									<li><a href="index.php?c=5">Edwin</a></li>
-									<li><a href="index.php?c=5">New Balance</a></li>
-									<li><a href="index.php?c=5">Jack & Jones</a></li>
-									<li><a href="index.php?c=5">Paul Smith</a></li>
-									<li><a href="index.php?c=5">Ray-Ban</a></li>
-									<li><a href="index.php?c=5">Wood Wood</a></li>
-								</ul>	
-							</div>
-						</div>
-					</div>
+					
 				</li>
 				<li class="grid"><a href="#">Sports</a>
-					<div class="mepanel">
-						<div class="row">
-							<div class="col1 me-one">
-								<h4>Shop</h4>
-								<ul>
-									<li><a href="index.php?c=5">New Arrivals</a></li>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">login</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">My Shopping Bag</a></li>
-								</ul>
-							</div>
-							<div class="col1 me-one">
-								<h4>Style Zone</h4>
-								<ul>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Style Videos</a></li>
-								</ul>	
-							</div>
-							<div class="col1 me-one">
-								<h4>Popular Brands</h4>
-								<ul>
-									<li><a href="index.php?c=5">Levis</a></li>
-									<li><a href="index.php?c=5">Persol</a></li>
-									<li><a href="index.php?c=5">Nike</a></li>
-									<li><a href="index.php?c=5">Edwin</a></li>
-									<li><a href="index.php?c=5">New Balance</a></li>
-									<li><a href="index.php?c=5">Jack & Jones</a></li>
-									<li><a href="index.php?c=5">Paul Smith</a></li>
-									<li><a href="index.php?c=5">Ray-Ban</a></li>
-									<li><a href="index.php?c=5">Wood Wood</a></li>
-								</ul>	
-							</div>
-						</div>
-					</div>
+					
 				</li>
 				<li class="grid"><a href="#">Brands</a>
-					<div class="mepanel">
-						<div class="row">
-							<div class="col1 me-one">
-								<h4>Shop</h4>
-								<ul>
-									<li><a href="index.php?c=5">New Arrivals</a></li>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">login</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">My Shopping Bag</a></li>
-								</ul>
-							</div>
-							<div class="col1 me-one">
-								<h4>Style Zone</h4>
-								<ul>
-									<li><a href="index.php?c=5">Men</a></li>
-									<li><a href="index.php?c=5">Women</a></li>
-									<li><a href="index.php?c=5">Brands</a></li>
-									<li><a href="index.php?c=5">Kids</a></li>
-									<li><a href="index.php?c=5">Accessories</a></li>
-									<li><a href="index.php?c=5">Style Videos</a></li>
-								</ul>	
-							</div>
-							<div class="col1 me-one">
-								<h4>Popular Brands</h4>
-								<ul>
-									<li><a href="index.php?c=5">Levis</a></li>
-									<li><a href="index.php?c=5">Persol</a></li>
-									<li><a href="index.php?c=5">Nike</a></li>
-									<li><a href="index.php?c=5">Edwin</a></li>
-									<li><a href="index.php?c=5">New Balance</a></li>
-									<li><a href="index.php?c=5">Jack & Jones</a></li>
-									<li><a href="index.php?c=5">Paul Smith</a></li>
-									<li><a href="index.php?c=5">Ray-Ban</a></li>
-									<li><a href="index.php?c=5">Wood Wood</a></li>
-								</ul>	
-							</div>
-						</div>
-					</div>
-				</li>
+					
+				</li> -->
 			</ul>
 		</div>
 		<div class="clearfix"> </div>

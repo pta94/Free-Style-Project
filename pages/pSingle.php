@@ -1,14 +1,14 @@
 <?php
-    $id = 1;
-    if(isset($_GET["id"])){
-        $id = $_GET["id"];
-    }
-    $sql = "SELECT MaSanPham, TenSanPham, TenLoaiSanPham, HinhURL, Gia, MoTa, SoLuongTon, lsp.MaLoaiSanPham
-    FROM sanpham sp, loaisanpham lsp
-    WHERE sp.BiXoa = 0 AND lsp.BiXoa = 0 AND sp.MaLoaiSanPham = lsp.MaLoaiSanPham AND MaSanPham = $id";
-    
-    $result = DataProvider::ExecuteQuery($sql);
-    $row = mysqli_fetch_array($result);
+$id = 1;
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+}
+$sql = "SELECT sp.MaSanPham, TenSanPham, TenLoaiSanPham, HinhURL, Gia, MoTa, SoLuongTon, lsp.MaLoaiSanPham, Hinh1, Hinh2, Hinh3 
+FROM sanpham sp, loaisanpham lsp, hinhchitiet hct 
+WHERE sp.BiXoa = 0 AND lsp.BiXoa = 0 AND sp.MaLoaiSanPham = lsp.MaLoaiSanPham AND sp.MaSanPham = hct.MaSanPham AND sp.MaSanPham = $id";
+
+$result = DataProvider::ExecuteQuery($sql);
+$row = mysqli_fetch_array($result);
 ?>
 <!--start-breadcrumbs-->
 <div class="breadcrumbs">
@@ -16,7 +16,7 @@
         <div class="breadcrumbs-main">
             <ol class="breadcrumb">
                 <li><a href="index.php">Home</a></li>
-                <li class="active"><a href="index.php?c=5&id=<?php echo $row["MaLoaiSanPham"]?>"><?php echo $row["TenLoaiSanPham"] ?></a></li>
+                <li class="active"><a href="index.php?c=5&id=<?php echo $row["MaLoaiSanPham"] ?>"><?php echo $row["TenLoaiSanPham"] ?></a></li>
                 <li class="active"><?php echo $row["TenSanPham"] ?></li>
             </ol>
         </div>
@@ -32,17 +32,17 @@
                 <div class="col-md-5 single-top-left">	
                     <div class="flexslider">
                         <ul class="slides">
-                            <li data-thumb="images/s1.jpg">
-                                <img src="images/s1.jpg" />
+                            <li data-thumb="images/<?php echo $row["HinhURL"] ?>">
+                                <img src="images/<?php echo $row["HinhURL"] ?>" />
                             </li>
-                            <li data-thumb="images/s2.jpg">
-                                <img src="images/s2.jpg" />
+                            <li data-thumb="images/<?php echo $row["Hinh1"] ?>">
+                                <img src="images/<?php echo $row["Hinh1"] ?>" />
                             </li>
-                            <li data-thumb="images/s3.jpg">
-                                <img src="images/s3.jpg" />
+                            <li data-thumb="images/<?php echo $row["Hinh2"] ?>">
+                                <img src="images/<?php echo $row["Hinh2"] ?>" />
                             </li>
-                            <li data-thumb="images/s4.jpg">
-                                <img src="images/s4.jpg" />
+                            <li data-thumb="images/<?php echo $row["Hinh3"] ?>">
+                                <img src="images/<?php echo $row["Hinh3"] ?>" />
                             </li>
                         </ul>
                     </div>
@@ -107,86 +107,37 @@ controlNav: "thumbnails"
     </div>
     <div class="clearfix"></div>
 </div>
+<?php 
+$sql = "SELECT MaSanPham, TenSanPham, HinhURL, Gia 
+FROM SanPham 
+WHERE BiXoa = 0 
+ORDER BY SoLuotXem 
+DESC LIMIT 0, 3";
+$result = DataProvider::ExecuteQuery($sql);
+?>
                 <div class="latest products">
                     <div class="product-one">
+                    <?php while ($row = mysqli_fetch_array($result)) { ?>
                         <div class="col-md-4 product-left single-left"> 
                             <div class="p-one simpleCart_shelfItem">
-                                
-                                <a href="#">
-                            <img src="images/shoes-1.png" alt="" />
-                            <div class="mask mask1">
-                                <span>Quick View</span>
-                            </div>
-                        </a>
-                                <h4>Aenean placerat</h4>
-                                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
-                                
-                            </div>
-                        </div>
-                        <div class="col-md-4 product-left single-left"> 
-                            <div class="p-one simpleCart_shelfItem">
-                                <a href="#">
-                            <img src="images/shoes-2.png" alt="" />
-                            <div class="mask mask1">
-                                <span>Quick View</span>
-                            </div>
-                        </a>
-                                <h4>Aenean placerat</h4>
-                                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
-                                
+                                <a href="index.php?c=6&id=<?php echo $row["MaSanPham"] ?>">
+                                    <img src="images/<?php echo $row["HinhURL"] ?>" alt="" />
+                                    <div class="mask mask1">
+                                    <span>Quick View</span>
+                                    </div>
+                                </a>
+                                <h4><?php echo $row["TenSanPham"] ?></h4>
+                                <p>
+                                <a class="item_add" href="#">
+                                    <i></i>
+                                    <span class=" item_price">$<?php echo $row["Gia"] ?></span>
+                                </a>
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-4 product-left single-left"> 
-                            <div class="p-one simpleCart_shelfItem">
-                                <a href="#">
-                            <img src="images/shoes-3.png" alt="" />
-                            <div class="mask mask1">
-                                <span>Quick View</span>
-                            </div>
-                        </a>
-                                <h4>Aenean placerat</h4>
-                                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>									
-                            </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="product-one">
-                        <div class="col-md-4 product-left single-left"> 
-                            <div class="p-one simpleCart_shelfItem">
-                                <a href="#">
-                            <img src="images/shoes-13.png" alt="" />
-                            <div class="mask mask1">
-                                <span>Quick View</span>
-                            </div>
-                        </a>
-                                <h4>Aenean placerat</h4>
-                                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>									
-                            </div>
-                        </div>
-                        <div class="col-md-4 product-left single-left"> 
-                            <div class="p-one simpleCart_shelfItem">
-                                <a href="#">
-                            <img src="images/shoes-5.png" alt="" />
-                            <div class="mask mask1">
-                                <span>Quick View</span>
-                            </div>
-                        </a>
-                                <h4>Aenean placerat</h4>
-                                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>									
-                            </div>
-                        </div>
-                        <div class="col-md-4 product-left single-left"> 
-                            <div class="p-one simpleCart_shelfItem">
-                                <a href="#">
-                            <img src="images/shoes-6.png" alt="" />
-                            <div class="mask mask1">
-                                <span>Quick View</span>
-                            </div>
-                            </a>
-                                <h4>Aenean placerat</h4>
-                                <p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>				
-                            </div>
-                        </div>
+                    <?php 
+                } ?>
+                      
                         <div class="clearfix"> </div>
                     </div>
                 </div>

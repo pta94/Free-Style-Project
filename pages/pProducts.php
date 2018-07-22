@@ -1,4 +1,21 @@
+<?php 
+$id = 1;
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+}
+$sql = "SELECT MaSanPham, TenSanPham, HinhURL, Gia, lsp.MaLoaiSanPham, lsp.TenLoaiSanPham 
+FROM SanPham sp, LoaiSanPham lsp 
+WHERE sp.BiXoa = 0 AND sp.MaLoaiSanPham = lsp.MaLoaiSanPham AND sp.MaLoaiSanPham = $id";
+$result = DataProvider::ExecuteQuery($sql);
+?>
 <!--start-breadcrumbs-->
+<?php 
+$sql = "SELECT MaLoaiSanPham, TenLoaiSanPham
+FROM LoaiSanPham
+WHERE MaLoaiSanPham =$id";
+$result1 = DataProvider::ExecuteQuery($sql);
+$row1 = mysqli_fetch_array($result1);
+?>
 <div class="breadcrumbs">
     <div class="container">
         <div class="breadcrumbs-main">
@@ -6,24 +23,13 @@
                 <li>
                     <a href="index.php">Home</a>
                 </li>
-                <li class="active">New Products</li>
+                <li class="active"><a href="index.php?c=5&id=<?php echo $row1["MaLoaiSanPham"] ?>"><?php echo $row1["TenLoaiSanPham"] ?></a></li>
             </ol>
         </div>
     </div>
 </div>
 <!--end-breadcrumbs-->
-<?php 
-    $id =1;
-    if(isset($_GET["id"])){
-        $id = $_GET["id"];
-    }
-    $sql = "SELECT MaSanPham, TenSanPham, HinhURL, Gia 
-    FROM SanPham 
-    WHERE BiXoa = 0 
-    ORDER BY MaSanPham 
-    DESC LIMIT 0, 9";
-    $result = DataProvider::ExecuteQuery($sql);
-?>
+
 <!--start-product-->
 <div class="product">
     <div class="container">
@@ -31,7 +37,7 @@
             <div class="col-md-9 p-left">
                 <!-- <div class="product-one"> -->
                     <!-- Single product -->
-                    <?php while($row = mysqli_fetch_array($result)){ ?>
+                    <?php while ($row = mysqli_fetch_array($result)) { ?>
                         <div class="col-md-4 product-left single-left"> 
                             <div class="p-one simpleCart_shelfItem">
                                 <a href="index.php?c=6&id=<?php echo $row["MaSanPham"] ?>">
@@ -49,7 +55,8 @@
                                 </p>
                             </div>
                         </div>
-                    <?php }?>
+                    <?php 
+                } ?>
                     <!-- Single product -->
                     <!-- <div class="clearfix"> </div> -->
                 <!-- </div> -->
