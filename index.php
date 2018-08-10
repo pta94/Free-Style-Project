@@ -5,7 +5,17 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php
-	include("libs/DataProvider.php");
+session_start();
+
+include("libs/DataProvider.php");
+include("libs/ShoppingCart.php");
+
+// session_destroy();
+
+if (isset($_SESSION["GioHang"]) == false) {
+	$gioHang = new GioHang();
+	$_SESSION["GioHang"] = serialize($gioHang);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,34 +83,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</script>
 <!--End-slider-script-->
 <?php 
-	$c = 1;
+$c = 1;
 
-	if(isset($_GET['c'])){
-		$c = $_GET['c'];
-	}
+if (isset($_GET['c'])) {
+	$c = $_GET['c'];
+}
 
-	switch($c){
-		case 1:
-			include("pages/pHome.php");
-			break;
-		case 2:
-			include("pages/pAccount.php");
-			break;
-		case 3:
-			include("pages/pCheckout.php");
-			break;
-		case 4:
-			include("pages/pContact.php");
-			break;
-		case 5:
-			include("pages/pProducts.php");
-			break;
-		case 6:
-			include("pages/pSingle.php");
-			break;
-		default:
-			include("pages/pError.php");
-	}
+switch ($c) {
+	case 1:
+		include("pages/pHome.php");
+		break;
+	case 2:
+		include("pages/pAccount.php");
+		break;
+	case 3:
+		include("pages/pShoppingCart/pCheckout.php");
+		break;
+	case 4:
+		include("pages/pContact.php");
+		break;
+	case 5:
+		include("pages/pProducts.php");
+		break;
+	case 6:
+		include("pages/pSingle.php");
+		break;
+	case 101:
+		//Xử lý thêm sản phẩm vào giỏ hàng
+		include("pages/pShoppingCart/exAddToCart.php");
+		break;
+	default:
+		include("pages/pError.php");
+}
 ?>
 <!--start-shoes--> 
 <!-- include("pages/pShoes.php"); -->

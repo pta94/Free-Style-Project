@@ -128,7 +128,7 @@ $result = DataProvider::ExecuteQuery($sql);
                                 </a>
                                 <h4><?php echo $row["TenSanPham"] ?></h4>
                                 <p>
-                                <a class="item_add" href="#">
+                                <a class="item_add" href="index.php?c=101&id=<?php echo $row["MaSanPham"]; ?>">
                                     <i></i>
                                     <span class=" item_price">$<?php echo $row["Gia"] ?></span>
                                 </a>
